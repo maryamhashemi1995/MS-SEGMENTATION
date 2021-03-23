@@ -26,8 +26,12 @@ IMG_HEIGHT = 128
 IMG_CHANNELS = 3
 
 
+#################################################################################
+#from google.colab import drive
+#drive.mount('/content/drive')
+#!unzip "/content/drive/My Drive/Colab Notebooks/dataset-UNet.zip"
 
-
+#################################################################################
 TRAIN_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/images/'
 MASK_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/masks/'
 TEST_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/test-flaire/images/'
@@ -41,9 +45,20 @@ masks_ids2=glob.glob(Mask_PATH2+"*.png")
 
 
 #################################################################################
+TRAIN_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/images/'
+MASK_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/masks/'
+TEST_PATH1 = '/content/drive/My Drive/data-MS/test-flaire/images/'
+Mask_PATH2 = '/content/drive/My Drive/data-MS/test-flaire/masks/'
 
+print(TRAIN_PATH1)
+train_ids=glob.glob(TRAIN_PATH1+"*.png") 
+masks_ids=glob.glob(MASK_PATH1+"*.png")
+test_ids=glob.glob(TEST_PATH1+"*.png")
+masks_ids2=glob.glob(Mask_PATH2+"*.png")
+
+print(train_ids)
            
-            
+#################################################################################            
 Y_train = np.zeros((1237, IMG_HEIGHT, IMG_WIDTH, 1))
 #1238 is number of masks that are not total black and have some information to be learned
 n=-1
@@ -65,7 +80,7 @@ for mask_file in masks_ids:
                 if mask[i,j]==0:
                     Y_train[n,i,j] =0 
                 else:
-                    Y_train[n,i,j] =255
+                    Y_train[n,i,j] =1
 
 
 X_train = np.zeros((1237, IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS))
@@ -78,7 +93,7 @@ for i in index_:
     img=resize(img,(IMG_HEIGHT, IMG_WIDTH), mode='constant', preserve_range=True)
     for i in range (0,IMG_HEIGHT-1):
         for j in range (0,IMG_WIDTH-1):
-            X_train[n,i,j]=img[i,j]
+            X_train[n,i,j]=img[i,j]/255
 
 
 #################################################################################                
@@ -106,7 +121,7 @@ for mask_file in masks_ids2:
                 if mask[i,j]==0:
                     Y_test[n,i,j] =0 
                 else:
-                    Y_test[n,i,j] =255
+                    Y_test[n,i,j] =1
                     
                     
                     
@@ -122,7 +137,7 @@ for i in index_:
     img=resize(img,(IMG_HEIGHT, IMG_WIDTH), mode='constant', preserve_range=True)
     for i in range (0,IMG_HEIGHT-1):
         for j in range (0,IMG_WIDTH-1):
-            X_test[n,i,j]=img[i,j]
+            X_test[n,i,j]=img[i,j]/255
 
 
 print('Done!')
@@ -132,19 +147,19 @@ print('Done!')
 ################################################################
 
 
-image_x = random.randint(0, len(X_train))
+#image_x = random.randint(0, len(X_train))
 #image_x2 = random.randint(0, 181)
-imshow(X_train[image_x])
-plt.show()
-imshow(np.squeeze(Y_train[image_x]))
-plt.show()
+#imshow(X_train[image_x])
+#plt.show()
+#imshow(np.squeeze(Y_train[image_x]))
+#plt.show()
 
 
 ##################################################################################
 #Build the model
 inputs = tf.keras.layers.Input((IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS))
-s = tf.keras.layers.Lambda(lambda x: x / 255)(inputs)
-####s=inputs
+#s = tf.keras.layers.Lambda(lambda x: x / 255)(inputs)
+s=inputs
 #Contraction path
 c1 = tf.keras.layers.Conv2D(16, (3, 3), activation='elu', kernel_initializer='he_normal', padding='same')(s)
 c1 = tf.keras.layers.Dropout(0.1)(c1)
@@ -201,26 +216,54 @@ outputs = tf.keras.layers.Conv2D(1, (1, 1), activation='sigmoid')(c9)
 
 import keras
 import keras.backend as k
-def Mean_IOU_Evaluator(y_true, y_pred):
-    
+from tensorflow.compat.v1.keras import backend as K
+
+
+def Mean_IOU_Evaluator(y_true, y_pred):   
     prec = []
     
     for t in np.arange(0.5, 1, 0.05):
         
-        y_pred_ = tf.to_int32(y_pred>t)
-        score, up_opt = tf.metrics.mean_iou(y_true, y_pred_, 2)
-        k.get_session().run(tf.local_variables_initializer())
+        #y_pred_ = tf.to_int32(y_pred>t)
+        y_pred_=tf.cast((y_pred>t), tf.int32)
+        #score, up_opt = tf.metrics.mean_iou(y_true, y_pred_, 2)
+        score, up_opt = tf.compat.v1.metrics.mean_iou (y_true, y_pred_, 2)
+        #k.get_session().run(tf.local_variables_initializer())
+        K.get_session().run(tf.local_variables_initializer())
         with tf.control_dependencies([up_opt]):
             score = tf.identity(score)
         prec.append(score)
     return k.mean(k.stack(prec), axis = 0)
 
+
+
+def DSC(y_true, y_pred):   
+    prec = []
     
+    for t in np.arange(0.5, 1, 0.05):
+        
+        #y_pred_ = tf.to_int32(y_pred>t)
+        y_pred_=tf.cast((y_pred>t), tf.int32)
+        #score, up_opt = tf.metrics.mean_iou(y_true, y_pred_, 2)
+        score, up_opt = tf.compat.v1.metrics.mean_iou (y_true, y_pred_, 2)
+        #k.get_session().run(tf.local_variables_initializer())
+        K.get_session().run(tf.local_variables_initializer())
+        with tf.control_dependencies([up_opt]):
+            score = tf.identity(score)
+            score_dsc=(2*score)/(score+1)
+        prec.append(score_dsc)
+    return k.mean(k.stack(prec), axis = 0)
+
+
+#NEW= tf.compat.v1.metrics.mean_iou(num_classes=2)    
 model = tf.keras.Model(inputs=[inputs], outputs=[outputs])
 #model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[Mean_IOU_Evaluator])
-
+#model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[Mean_IOU_Evaluator])
+#model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[tf.keras.metrics.MeanIoU(num_classes=2)])
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[DSC])
+#model.compile(optimizer='sgd', loss='binary_crossentropy', metrics=[DSC])
 model.summary()
+
 
 
 
@@ -238,7 +281,7 @@ model.summary()
         #tf.keras.callbacks.EarlyStopping(patience=2, monitor='val_loss'),
         #tf.keras.callbacks.TensorBoard(log_dir='logs')]
 
-history = model.fit(X_train, Y_train, validation_split=0.1, batch_size=2 , epochs=40)
+history = model.fit(X_train, Y_train, validation_split=0.1, batch_size=2 , epochs=150)
 
 #history2 = model2.fit(X_train2, Y_train2, validation_split=0.1, batch_size=32 , epochs=20)
 
@@ -260,12 +303,19 @@ plt.show();
 plt.figure()
 plt.plot(history.history['acc'])
 plt.plot(history.history['val_acc'])
-plt.title('model accuracy')
-plt.ylabel('accuracy')
+plt.title('Intersection Over Union')
+plt.ylabel('iou')
 plt.xlabel('epoch')
 plt.legend(['train', 'validation'], loc='upper left')
 plt.show()
-
+####################################################################
+plt.plot(history.history['DSC'])
+plt.plot(history.history['val_DSC'])
+plt.title('dsc')
+plt.ylabel('DSC')
+plt.xlabel('epochs')
+plt.legend(['Training','Validation'], loc = 'upper left')
+plt.show()
 
 from keras.utils import plot_model
 plot_model(model, to_file='model1.png')

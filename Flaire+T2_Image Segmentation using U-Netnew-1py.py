@@ -20,8 +20,6 @@ from skimage.io import imread, imshow
 from skimage.transform import resize
 import matplotlib.pyplot as plt
 import glob
-
-########## Add by Mahsa
 import keras.backend as k
 
 seed = 42
@@ -370,13 +368,9 @@ model.summary()
 ####### comment by Mahsa
 #Adam=tf.keras.optimizers.Adam(learning_rate=0.01,beta_1=0.9,beta_2=0.999,epsilon=1e-07,amsgrad=False,
 #    name="Adam")
-
-############ Comment by Mahsa
 #model.compile(optimizer=Adam, loss='binary_crossentropy', metrics=[tf.keras.metrics.MeanIoU(num_classes=2)])
 
 
-
-#### Add by Mahsa
 def Mean_IOU_Evaluator(y_true, y_pred):
     
     prec = []
@@ -391,8 +385,6 @@ def Mean_IOU_Evaluator(y_true, y_pred):
         prec.append(score)
     return k.mean(k.stack(prec), axis = 0)
 
-
-############ Written by Mahsa
 #model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[Mean_IOU_Evaluator])
 
 opt=tf.keras.optimizers.Adam(lr=0.005)
@@ -412,7 +404,6 @@ results = model.fit(X_train, Y_train, validation_split=0.1, batch_size=16, epoch
 # 7. Show The Results per Epoch
 
 ####################################
-############## Add by Mahsa
 
 # 11.1. Summarize History for Loss
 
@@ -434,7 +425,7 @@ plt.ylabel('IOU')
 plt.xlabel('epochs')
 plt.legend(['Training','Validation'], loc = 'upper left')
 plt.show()
- ########################### Finish Part adding by Mahsa
+ ###########################
 
 
 from matplotlib import pyplot as plt

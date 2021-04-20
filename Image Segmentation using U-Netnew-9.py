@@ -45,20 +45,8 @@ masks_ids2=glob.glob(Mask_PATH2+"*.png")
 
 
 #################################################################################
-#TRAIN_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/images/'
-#MASK_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/masks/'
-#TEST_PATH1 = '/content/drive/My Drive/data-MS/test-flaire/images/'
-#Mask_PATH2 = '/content/drive/My Drive/data-MS/test-flaire/masks/'
 
-#print(TRAIN_PATH1)
-#train_ids=glob.glob(TRAIN_PATH1+"*.png") 
-#masks_ids=glob.glob(MASK_PATH1+"*.png")
-#test_ids=glob.glob(TEST_PATH1+"*.png")
-#masks_ids2=glob.glob(Mask_PATH2+"*.png")
-
-#print(train_ids)
-           
-#################################################################################            
+                
 Y_train = np.zeros((1237, IMG_HEIGHT, IMG_WIDTH, 1))
 #1238 is number of masks that are not total black and have some information to be learned
 n=-1
@@ -466,83 +454,3 @@ plt.show()
 imshow(np.squeeze(preds_val_t[ix]))
 plt.show()
 
-#####################################################################
-#image=cv2.imread("C:/Users/MaryamHashemi/Desktop/Mahsa/dataset-UNet/trainnew/images/training04_04_flair_pp_new_082.png")
-image=cv2.imread("C:/Users/MaryamHashemi/Desktop/Mahsa/dataset-UNet/test-flaire/images/training02_04_flair_pp_new_064.png")
-lesion=imread("C:/Users/MaryamHashemi/Desktop/Mahsa/dataset-UNet/test-flaire/masks/training02_04_mask1_new_064.png")
-
-
-imshow(image)
-plt.show()
-imshow(lesion)
-plt.show
-
-
-
-image=resize(image,(IMG_HEIGHT, IMG_WIDTH), mode='constant', preserve_range=True)
-imagee = np.expand_dims(image, axis=0)
-predict=model.predict(imagee)
-
-predictnew=np.zeros( (IMG_HEIGHT, IMG_WIDTH), dtype=np.uint8)
-for i in range (0,predictnew.shape[0]-1):
-    for j in range (0,predictnew.shape[1]-1):
-        if predict[0,i,j,0]==1:
-        #print(predict[0,i,j,0])
-            predictnew[i,j]=predict[0,i,j,0]
-
-        
-imshow(predict[0,:,:,0])        
-imshow(predictnew)
-
-cv2.imshow('',predictnew)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-cv2.imwrite("result.jpg", predictnew)
-
-
-
-
-image2=resize(image2,(IMG_HEIGHT, IMG_WIDTH), mode='constant', preserve_range=True)
-imagee2 = np.expand_dims(image2, axis=0)
-predict2=model2.predict(imagee2)
-
-predictnew2=np.zeros( (IMG_HEIGHT, IMG_WIDTH), dtype=np.uint8)
-for i in range (0,predictnew2.shape[0]-1):
-    for j in range (0,predictnew2.shape[1]-1):
-        if predict2[0,i,j,0]==1:
-        #print(predict[0,i,j,0])
-            predictnew2[i,j]=predict2[0,i,j,0]
-
-        
-        
-imshow(predictnew2)
-
-##############################################
-
-
-imaget=cv2.imread("C:/Users/MaryamHashemi/Desktop/Mahsa/dataset-UNet/test-flaire/images/training02_04_flair_pp_new_132.png")
-lesiont=imread("C:/Users/MaryamHashemi/Desktop/Mahsa/dataset-UNet/test-flaire/masks/training02_04_mask1_new_132.png")
-
-imshow(imaget)
-plt.show()
-imshow(lesiont)
-plt.show
-
-
-imaget=resize(imaget,(IMG_HEIGHT, IMG_WIDTH), mode='constant', preserve_range=True)
-imageet = np.expand_dims(imaget, axis=0)
-predictf=model.predict(imageet)
-predictt2=model2.predict(imageet)
-
-predictnewt=np.zeros( (IMG_HEIGHT, IMG_WIDTH), dtype=np.uint8)
-for i in range (0,predictnewt.shape[0]-1):
-    for j in range (0,predictnewt.shape[1]-1):
-        if predictf[0,i,j,0]==1 or predictt2[0,i,j,0]==1:
-        #print(predict[0,i,j,0])
-            predictnewt[i,j]=predictf[0,i,j,0]
-            
-            
-imshow(predictnewt)  
-imshow(predictt2[0,:,:,0])         
-imshow(predictf[0,:,:,0])   

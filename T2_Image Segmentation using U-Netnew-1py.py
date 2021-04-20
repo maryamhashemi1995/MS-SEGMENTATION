@@ -53,20 +53,6 @@ test_ids=glob.glob(TEST_PATH1+"*.png")
 masks_ids2=glob.glob(Mask_PATH2+"*.png")
 
 
-
-#################################################################################
-#TRAIN_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/images/'
-#MASK_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/masks/'
-#TEST_PATH1 = '/content/drive/My Drive/data-MS/test-flaire/images/'
-#Mask_PATH2 = '/content/drive/My Drive/data-MS/test-flaire/masks/'
-
-#print(TRAIN_PATH1)
-#train_ids=glob.glob(TRAIN_PATH1+"*.png") 
-#masks_ids=glob.glob(MASK_PATH1+"*.png")
-#test_ids=glob.glob(TEST_PATH1+"*.png")
-#masks_ids2=glob.glob(Mask_PATH2+"*.png")
-
-#print(train_ids)
            
 #################################################################################            
 Y_train = np.zeros((1413, IMG_HEIGHT, IMG_WIDTH, 1))
@@ -253,7 +239,6 @@ model.summary()
 
 
 
-#### Add by Mahsa
 def Mean_IOU_Evaluator(y_true, y_pred):
     
     prec = []
@@ -269,7 +254,6 @@ def Mean_IOU_Evaluator(y_true, y_pred):
     return k.mean(k.stack(prec), axis = 0)
 
 
-############ Written by Mahsa
 #model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[Mean_IOU_Evaluator])
 
 opt=tf.keras.optimizers.Adam(lr=0.005)
@@ -289,7 +273,6 @@ results = model.fit(X_train, Y_train, validation_split=0.1, batch_size=16, epoch
 # 7. Show The Results per Epoch
 
 ####################################
-############## Add by Mahsa
 
 # 11.1. Summarize History for Loss
 
@@ -311,7 +294,7 @@ plt.ylabel('IOU')
 plt.xlabel('epochs')
 plt.legend(['Training','Validation'], loc = 'upper left')
 plt.show()
- ########################### Finish Part adding by Mahsa
+ ########################### 
 
 
 from matplotlib import pyplot as plt

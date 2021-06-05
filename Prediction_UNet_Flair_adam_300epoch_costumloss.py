@@ -105,7 +105,7 @@ for i in index_:
 #################################################################################                
 # test images
 
-Y_test = np.zeros((87, IMG_HEIGHT, IMG_WIDTH, 1))
+Y_test = np.zeros((86, IMG_HEIGHT, IMG_WIDTH, 1))
 
 n=-1
 index=0
@@ -140,7 +140,7 @@ print("all pixels",(zerocount_t+notzero_t),"black/white pixels",(zerocount_t/not
                     
                     
                     
-X_test = np.zeros((87, IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS))
+X_test = np.zeros((86, IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS))
 
 n=-1
 for i in index_:

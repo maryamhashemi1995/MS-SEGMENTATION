@@ -38,10 +38,10 @@ model.load_weights('C:/Users/MaryamHashemi/Desktop/MS/Results/UNet-DSC-costumlos
 
 
 #################################################################################
-TRAIN_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/images/'
-MASK_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/masks/'
-TEST_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/test-flaire/images/'
-Mask_PATH2 = 'E:/CODE/Mahsa/dataset-UNet/test-flaire/masks/'
+TRAIN_PATH1 = 'E:/.../dataset-UNet/train-flaire/images/'
+MASK_PATH1 = 'E:/.../dataset-UNet/train-flaire/masks/'
+TEST_PATH1 = 'E:/.../dataset-UNet/test-flaire/images/'
+Mask_PATH2 = 'E:/.../dataset-UNet/test-flaire/masks/'
 
 
 train_ids=glob.glob(TRAIN_PATH1+"*.png") 
@@ -186,7 +186,6 @@ def parameters(TP_array,TN_array,FP_array,FN_array):
     sens_array=[]
     speci_array=[]
     errorrate_array=[]
-    fnr_array=[]
     exfra_array=[]
     ppv_array=[]
     npv_array=[]
@@ -198,7 +197,6 @@ def parameters(TP_array,TN_array,FP_array,FN_array):
         Sensitivity_me=(TP_array[i])/(TP_array[i]+FN_array[i])
         Specificity_me=(TN_array[i])/(TN_array[i]+FP_array[i])
         Error_rate=(FP_array[i]+FN_array[i])/(TP_array[i]+TN_array[i]+FN_array[i]+FP_array[i])
-        FNR=(FN_array[i])/(TN_array[i]+FN_array[i])
         Extra_Fraction=(FP_array[i])/(TN_array[i]+FN_array[i])
         NPV=(TN_array[i])/(TN_array[i]+FN_array[i])
         PPV=(TP_array[i])/(TP_array[i]+FP_array[i])
@@ -211,11 +209,10 @@ def parameters(TP_array,TN_array,FP_array,FN_array):
         sens_array.append(Sensitivity_me)
         speci_array.append(Specificity_me)
         errorrate_array.append(Error_rate)
-        fnr_array.append(FNR)
         exfra_array.append(Extra_Fraction)
         ppv_array.append(PPV)
         npv_array.append(NPV)
-    return counter_array,DSC_array,IOU_array,accu_array,sens_array,speci_array,errorrate_array,fnr_array,exfra_array,ppv_array,npv_array
+    return counter_array,DSC_array,IOU_array,accu_array,sens_array,speci_array,errorrate_array,exfra_array,ppv_array,npv_array
 
 
 
@@ -245,7 +242,7 @@ for i in range(preds_test_t.shape[0]):
     FN_array.append(FN)    
 
 
-counter_array,DSC_array,IOU_array,accu_array,sens_array,speci_array,errorrate_array,fnr_array,exfra_array,ppv_array,npv_array =parameters(TP_array,TN_array,FP_array,FN_array)
+counter_array,DSC_array,IOU_array,accu_array,sens_array,speci_array,errorrate_array,exfra_array,ppv_array,npv_array =parameters(TP_array,TN_array,FP_array,FN_array)
 
 
 import statistics
@@ -266,9 +263,6 @@ print("Variance of Specificity for Test data is:", (statistics.variance(speci_ar
 
 print("Mean of Errore Rate for Test data is:", (statistics.mean(errorrate_array)))
 print("Variance of Errore Rate for Test data is:", (statistics.variance(errorrate_array)))
-
-print("Mean of FNR for Test data is:", (statistics.mean(fnr_array)))
-print("Variance of FNR for Test data is:", (statistics.variance(fnr_array)))
 
 print("Mean of Extra Fraction for Test data is:", (statistics.mean(exfra_array)))
 print("Variance of Extra Fraction for Test data is:", (statistics.variance(exfra_array)))
@@ -389,7 +383,6 @@ def parameters2(TP_array,TN_array,FP_array,FN_array):
     sens_array=[]
     speci_array=[]
     errorrate_array=[]
-    fnr_array=[]
     exfra_array=[]
     ppv_array=[]
     npv_array=[]
@@ -401,7 +394,6 @@ def parameters2(TP_array,TN_array,FP_array,FN_array):
         Sensitivity_me=(TP_array[i])/(TP_array[i]+FN_array[i])
         Specificity_me=(TN_array[i])/(TN_array[i]+FP_array[i])
         Error_rate=(FP_array[i]+FN_array[i])/(TP_array[i]+TN_array[i]+FN_array[i]+FP_array[i])
-        FNR=(FN_array[i])/(TN_array[i]+FN_array[i])
         Extra_Fraction=(FP_array[i])/(TN_array[i]+FN_array[i])
         NPV=(TN_array[i])/(TN_array[i]+FN_array[i])
         PPV=(TP_array[i])/(TP_array[i]+FP_array[i])
@@ -414,11 +406,10 @@ def parameters2(TP_array,TN_array,FP_array,FN_array):
         sens_array.append(Sensitivity_me)
         speci_array.append(Specificity_me)
         errorrate_array.append(Error_rate)
-        fnr_array.append(FNR)
         exfra_array.append(Extra_Fraction)
         ppv_array.append(PPV)
         npv_array.append(NPV)
-    return counter_array,DSC_array,IOU_array,accu_array,sens_array,speci_array,errorrate_array,fnr_array,exfra_array,ppv_array,npv_array
+    return counter_array,DSC_array,IOU_array,accu_array,sens_array,speci_array,errorrate_array,exfra_array,ppv_array,npv_array
 
 
 
@@ -448,7 +439,7 @@ for i in range(preds_train.shape[0]):
     
     
     
-counter_array,DSC_array,IOU_array,accu_array,sens_array,speci_array,errorrate_array,fnr_array,exfra_array,ppv_array,npv_array =parameters2(TP1_array,TN1_array,FP1_array,FN1_array)
+counter_array,DSC_array,IOU_array,accu_array,sens_array,speci_array,errorrate_array,exfra_array,ppv_array,npv_array =parameters2(TP1_array,TN1_array,FP1_array,FN1_array)
 
 
 
@@ -470,9 +461,6 @@ print("Variance of Specificity for Train data is:", (statistics.variance(speci_a
 
 print("Mean of Error Rate for Train data is:", (statistics.mean(errorrate_array)))
 print("Variance of Error Rate for Train data is:", (statistics.variance(errorrate_array)))
-
-print("Mean of FNR for Train data is:", (statistics.mean(fnr_array)))
-print("Variance of FNR for Train data is:", (statistics.variance(fnr_array)))
 
 print("Mean of Extra Fraction for Train data is:", (statistics.mean(exfra_array)))
 print("Variance of Extra Fraction for Train data is:", (statistics.variance(exfra_array)))
@@ -540,16 +528,6 @@ plt.xlabel("Number of Image",fontsize='30')	#adds a label in the x axis
 plt.ylabel("Errore Rate",fontsize='36')	#adds a label in the y axis
 #plt.legend(('YvsX'),loc='best')	#creates a legend to identify the plot
 plt.savefig('Errore Rate_array.png')	#saves the figure in the present directory
-plt.grid()	#shows a grid under the plot
-plt.show()
-
-
-plt.title("FNR Scatter Plot for Train Data", fontsize='36')	#title
-plt.scatter( counter_array,fnr_array,color='red', marker='o')	#plot the points
-plt.xlabel("Number of Image",fontsize='36')	#adds a label in the x axis
-plt.ylabel("FNR",fontsize='36')	#adds a label in the y axis
-#plt.legend(('YvsX'),loc='best')	#creates a legend to identify the plot
-plt.savefig('FNR_array.png')	#saves the figure in the present directory
 plt.grid()	#shows a grid under the plot
 plt.show()
 
@@ -709,6 +687,5 @@ plt.title("Blue=False Negative, Red=False Positive")
 #Sensitivity=(TP)/(TP+FN)
 #Specificity=(TN)/(TN+FP)
 #FPR=1-Specificity
-#FNR=(FN)/(TN+FN)
 #Extra_Fraction=(FP)/(TN+FN)
 #PPV=(TP)/(TP+FP)

@@ -29,8 +29,6 @@ np.random.seed = seed
 
 IMG_WIDTH = 128
 IMG_HEIGHT = 128
-#IMG_WIDTH = 256
-#IMG_HEIGHT = 256
 IMG_CHANNELS = 3
 
 
@@ -40,45 +38,17 @@ IMG_CHANNELS = 3
 #!unzip "/content/drive/My Drive/Colab Notebooks/dataset-UNet.zip"
 
 #################################################################################
-#reading MRI scans (Comment by Mahsa)
-# TRAIN_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-t2/images/'
-# MASK_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-t2/masks/'
-# TEST_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/test-t2/images/'
-# Mask_PATH2 = 'E:/CODE/Mahsa/dataset-UNet/test-t2/masks/'
-
-#reading MRI scans   (add by Mahsa)
-# TRAIN_PATH1 = 'E:/MS_Python_18Far/T2/train-t2/images/'
-# MASK_PATH1 = 'E:/MS_Python_18Far/T2/train-t2/masks/'
-# TEST_PATH1 = 'E:/MS_Python_18Far/T2/test-t2/images/'
-# Mask_PATH2 = 'E:/MS_Python_18Far/T2/test-t2/masks/'
-
-TRAIN_PATH1 = 'D:/Mapna/Results_T2_UNET_DSC_ADAM_COSTUMLOSS1.5,1_EPOCHS300_learning/train-t2/images/'
-MASK_PATH1 = 'D:/Mapna/Results_T2_UNET_DSC_ADAM_COSTUMLOSS1.5,1_EPOCHS300_learning/train-t2/masks/'
-TEST_PATH1 = 'D:/Mapna/Results_T2_UNET_DSC_ADAM_COSTUMLOSS1.5,1_EPOCHS300_learning/test-t2/images/'
-Mask_PATH2 = 'D:/Mapna/Results_T2_UNET_DSC_ADAM_COSTUMLOSS1.5,1_EPOCHS300_learning/test-t2/masks/'
-
+#reading MRI scans 
+TRAIN_PATH1 = 'E:/.../dataset-UNet/train-t2/images/'
+MASK_PATH1 = 'E:/.../dataset-UNet/train-t2/masks/'
+TEST_PATH1 = 'E:/.../dataset-UNet/test-t2/images/'
+Mask_PATH2 = 'E:/.../dataset-UNet/test-t2/masks/'
 
 
 train_ids=glob.glob(TRAIN_PATH1+"*.png") 
 masks_ids=glob.glob(MASK_PATH1+"*.png")
 test_ids=glob.glob(TEST_PATH1+"*.png")
 masks_ids2=glob.glob(Mask_PATH2+"*.png")
-
-
-
-#################################################################################
-#TRAIN_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/images/'
-#MASK_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/masks/'
-#TEST_PATH1 = '/content/drive/My Drive/data-MS/test-flaire/images/'
-#Mask_PATH2 = '/content/drive/My Drive/data-MS/test-flaire/masks/'
-
-#print(TRAIN_PATH1)
-#train_ids=glob.glob(TRAIN_PATH1+"*.png") 
-#masks_ids=glob.glob(MASK_PATH1+"*.png")
-#test_ids=glob.glob(TEST_PATH1+"*.png")
-#masks_ids2=glob.glob(Mask_PATH2+"*.png")
-
-#print(train_ids)
            
 #################################################################################  
 
@@ -192,13 +162,6 @@ print('Done!')
 
 
 ##################################################################################
-#from sklearn.datasets import make_classification
-#from sklearn.model_selection import train_test_split
-#Y_test,Y_train,X_test, X_train  = train_test_split(Y_train, X_train, test_size=0.93, shuffle=True)
-
-
-
-##################################################################################
 #Build the model
 inputs = tf.keras.layers.Input((IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS))
 s = tf.keras.layers.Lambda(lambda x: x / 255)(inputs)
@@ -301,7 +264,7 @@ def generalized_DSC_loss(y_true, y_pred):
     return Loss
 
     
-################ Comment by Mahsa    
+################   
 # def custom_loss(y_true, y_pred):
     
     
@@ -330,9 +293,6 @@ model.compile(optimizer="adam", loss=custom_loss,
        # tf.keras.callbacks.TensorBoard(log_dir='logs')]
 
 
-
-
-#results = model.fit(X_train, Y_train, validation_split=0.1, batch_size=16, epochs=30, callbacks=callbacks)
 results = model.fit(X_train, Y_train, validation_split=0.15, batch_size=16, epochs=300)
 
 ####################################

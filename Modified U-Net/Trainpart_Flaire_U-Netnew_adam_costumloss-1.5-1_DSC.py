@@ -28,8 +28,6 @@ np.random.seed = seed
 
 IMG_WIDTH = 128
 IMG_HEIGHT = 128
-#IMG_WIDTH = 256
-#IMG_HEIGHT = 256
 IMG_CHANNELS = 3
 
 
@@ -40,15 +38,11 @@ IMG_CHANNELS = 3
 
 #################################################################################
 #reading MRI scans
-TRAIN_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/images/'
-MASK_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/masks/'
-TEST_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/test-flaire/images/'
-Mask_PATH2 = 'E:/CODE/Mahsa/dataset-UNet/test-flaire/masks/'
+TRAIN_PATH1 = 'E:/.../dataset-UNet/train-flaire/images/'
+MASK_PATH1 = 'E:/.../dataset-UNet/train-flaire/masks/'
+TEST_PATH1 = 'E:/.../dataset-UNet/test-flaire/images/'
+Mask_PATH2 = 'E:/.../dataset-UNet/test-flaire/masks/'
 
-#TRAIN_PATH1 = 'E:/MS_Python_18Far/train-flaire/images/'
-#MASK_PATH1 = 'E:/MS_Python_18Far/train-flaire/masks/'
-#TEST_PATH1 = 'E:/MS_Python_18Far/test-flaire/images/'
-#Mask_PATH2 = 'E:/MS_Python_18Far/test-flaire/masks/'
 
 
 
@@ -310,8 +304,6 @@ model.compile(optimizer="adam", loss=custom_loss,
 
 
 
-
-#results = model.fit(X_train, Y_train, validation_split=0.1, batch_size=16, epochs=30, callbacks=callbacks)
 results = model.fit(X_train, Y_train, validation_split=0.15, batch_size=16, epochs=300)
 
 ####################################

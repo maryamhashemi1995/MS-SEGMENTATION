@@ -33,10 +33,7 @@ IMG_HEIGHT = 128
 IMG_CHANNELS = 3
 
 
-#################################################################################
-#from google.colab import drive
-#drive.mount('/content/drive')
-#!unzip "/content/drive/My Drive/Colab Notebooks/dataset-UNet.zip"
+
 
 #################################################################################
 TRAIN_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/images/'
@@ -44,34 +41,12 @@ MASK_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/masks/'
 TEST_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/test-flaire/images/'
 Mask_PATH2 = 'E:/CODE/Mahsa/dataset-UNet/test-flaire/masks/'
 
-#TRAIN_PATH1 = 'E:/MS_Python_18Far/train-flaire/images/'
-#MASK_PATH1 = 'E:/MS_Python_18Far/train-flaire/masks/'
-#TEST_PATH1 = 'E:/MS_Python_18Far/test-flaire/images/'
-#Mask_PATH2 = 'E:/MS_Python_18Far/test-flaire/masks/'
-
-
-
 train_ids=glob.glob(TRAIN_PATH1+"*.png") 
 masks_ids=glob.glob(MASK_PATH1+"*.png")
 test_ids=glob.glob(TEST_PATH1+"*.png")
 masks_ids2=glob.glob(Mask_PATH2+"*.png")
 
 
-
-#################################################################################
-#TRAIN_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/images/'
-#MASK_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/masks/'
-#TEST_PATH1 = '/content/drive/My Drive/data-MS/test-flaire/images/'
-#Mask_PATH2 = '/content/drive/My Drive/data-MS/test-flaire/masks/'
-
-#print(TRAIN_PATH1)
-#train_ids=glob.glob(TRAIN_PATH1+"*.png") 
-#masks_ids=glob.glob(MASK_PATH1+"*.png")
-#test_ids=glob.glob(TEST_PATH1+"*.png")
-#masks_ids2=glob.glob(Mask_PATH2+"*.png")
-
-#print(train_ids)
-           
 ################################################################################# 
 ############  PREPROCESSING PART ############  
 
@@ -192,9 +167,6 @@ print('Done!')
 
 #Build the model
 
-#from sklearn.datasets import make_classification
-#from sklearn.model_selection import train_test_split
-#Y_test,Y_train,X_test, X_train  = train_test_split(Y_train, X_train, test_size=0.93, shuffle=True)
 
 import tensorflow as tf
 from tensorflow.keras import backend as K                                       
@@ -408,18 +380,6 @@ model=Attention_U_Net_2D(image_shape,'elu',
 ##################################################################################
 
 
-#learning rate finder
-
-
-#lr_finder = LRFinder(model)
-# Train a model with learning rate growing exponentially from 0.00001 to 10
-#lr_finder.find(X_train, Y_train, start_lr=0.0001, end_lr=1, batch_size=32, epochs=5)
-
-# Plot the loss, ignore 20 batches in the beginning and 5 in the end
-#lr_finder.plot_loss(n_skip_beginning=20, n_skip_end=5)
-#lr_finder.plot_loss_change(sma=20, n_skip_beginning=20, n_skip_end=5, y_lim=(-0.01, 0.01))
-
-#results = model.fit(X_train, Y_train, validation_split=0.1, batch_size=16, epochs=30, callbacks=callbacks)
 results = model.fit(X_train, Y_train, validation_split=0.15, batch_size=16, epochs=300)
 ####################################
 

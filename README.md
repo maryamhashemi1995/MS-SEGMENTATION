@@ -1,3 +1,3 @@
 # MS-SEGMENTATION
-Maryam Hashemi, and Mahsa Akhbari, "Delve into MS Lesion Area Exploration: a Modified Attention
-U-Net for MS Lesion Segmentation in MRI Scans.", 2021.
+"Delve into Multiple Sclerosis (MS) Lesion Exploration: A Modified
+Attention U-Net for MS Lesion Segmentation in Brain MRI". Maryam Hashemi, Mahsa Akhbari, Christian Jutten.

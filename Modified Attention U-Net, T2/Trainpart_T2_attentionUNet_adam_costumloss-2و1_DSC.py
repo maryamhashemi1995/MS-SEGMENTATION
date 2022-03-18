@@ -39,10 +39,10 @@ IMG_CHANNELS = 3
 #!unzip "/content/drive/My Drive/Colab Notebooks/dataset-UNet.zip"
 
 #################################################################################
-TRAIN_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-t2/images/'
-MASK_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-t2/masks/'
-TEST_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/test-t2/images/'
-Mask_PATH2 = 'E:/CODE/Mahsa/dataset-UNet/test-t2/masks/'
+TRAIN_PATH1 = 'E:/CODE/.../images/'
+MASK_PATH1 = 'E:/CODE/.../masks/'
+TEST_PATH1 = 'E:/CODE/.../images/'
+Mask_PATH2 = 'E:/CODE/.../masks/'
 
 
 
@@ -52,19 +52,6 @@ test_ids=glob.glob(TEST_PATH1+"*.png")
 masks_ids2=glob.glob(Mask_PATH2+"*.png")
 
 
-#################################################################################
-#TRAIN_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/images/'
-#MASK_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/masks/'
-#TEST_PATH1 = '/content/drive/My Drive/data-MS/test-flaire/images/'
-#Mask_PATH2 = '/content/drive/My Drive/data-MS/test-flaire/masks/'
-
-#print(TRAIN_PATH1)
-#train_ids=glob.glob(TRAIN_PATH1+"*.png") 
-#masks_ids=glob.glob(MASK_PATH1+"*.png")
-#test_ids=glob.glob(TEST_PATH1+"*.png")
-#masks_ids2=glob.glob(Mask_PATH2+"*.png")
-
-#print(train_ids)
            
 ################################################################################# 
 ############  PREPROCESSING PART ############  

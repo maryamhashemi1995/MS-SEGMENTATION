@@ -36,10 +36,10 @@ IMG_CHANNELS = 3
 
 
 #################################################################################
-TRAIN_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/images/'
-MASK_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/masks/'
-TEST_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/test-flaire/images/'
-Mask_PATH2 = 'E:/CODE/Mahsa/dataset-UNet/test-flaire/masks/'
+TRAIN_PATH1 = 'E:/.../train-flaire/images/'
+MASK_PATH1 = 'E:/.../train-flaire/masks/'
+TEST_PATH1 = 'E:/.../test-flaire/images/'
+Mask_PATH2 = 'E:/.../test-flaire/masks/'
 
 train_ids=glob.glob(TRAIN_PATH1+"*.png") 
 masks_ids=glob.glob(MASK_PATH1+"*.png")

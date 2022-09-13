@@ -42,15 +42,15 @@ IMG_CHANNELS = 3
 #################################################################################
 #reading MRI scans
 ############# Comment by mahsa
-# TRAIN_PATH_t2 = 'E:/CODE/Mahsa/dataset-UNet/train-t2/images/'
-# TRAINMASK_PATH_t2 = 'E:/CODE/Mahsa/dataset-UNet/train-t2/masks/'
-# TEST_PATH_t2 = 'E:/CODE/Mahsa/dataset-UNet/test-t2/images/'
-# TESTMask_PATH_t2 = 'E:/CODE/Mahsa/dataset-UNet/test-t2/masks/'
+# TRAIN_PATH_t2 = 'E:/.../train-t2/images/'
+# TRAINMASK_PATH_t2 = 'E:/.../train-t2/masks/'
+# TEST_PATH_t2 = 'E:/.../test-t2/images/'
+# TESTMask_PATH_t2 = 'E:/.../test-t2/masks/'
 
-# TRAIN_PATH_flair = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/images/'
-# TRAINMASK_PATH_flair = 'E:/CODE/Mahsa/dataset-UNet/train-flaire/masks/'
-# TEST_PATH_flair = 'E:/CODE/Mahsa/dataset-UNet/test-flaire/images/'
-# TESTMask_PATH_flair= 'E:/CODE/Mahsa/dataset-UNet/test-flaire/masks/'
+# TRAIN_PATH_flair = 'E:/.../train-flaire/images/'
+# TRAINMASK_PATH_flair = 'E:/.../train-flaire/masks/'
+# TEST_PATH_flair = 'E:/.../test-flaire/images/'
+# TESTMask_PATH_flair= 'E:/.../test-flaire/masks/'
 
 
 #reading MRI scans   (add by Mahsa)

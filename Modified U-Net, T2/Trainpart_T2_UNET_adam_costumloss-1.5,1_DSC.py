@@ -41,21 +41,12 @@ IMG_CHANNELS = 3
 
 #################################################################################
 #reading MRI scans (Comment by Mahsa)
-# TRAIN_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-t2/images/'
-# MASK_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/train-t2/masks/'
-# TEST_PATH1 = 'E:/CODE/Mahsa/dataset-UNet/test-t2/images/'
-# Mask_PATH2 = 'E:/CODE/Mahsa/dataset-UNet/test-t2/masks/'
+# TRAIN_PATH1 = 'E:/.../train-t2/images/'
+# MASK_PATH1 = 'E:/.../train-t2/masks/'
+# TEST_PATH1 = 'E:/.../test-t2/images/'
+# Mask_PATH2 = 'E:/.../test-t2/masks/'
 
-#reading MRI scans   (add by Mahsa)
-# TRAIN_PATH1 = 'E:/MS_Python_18Far/T2/train-t2/images/'
-# MASK_PATH1 = 'E:/MS_Python_18Far/T2/train-t2/masks/'
-# TEST_PATH1 = 'E:/MS_Python_18Far/T2/test-t2/images/'
-# Mask_PATH2 = 'E:/MS_Python_18Far/T2/test-t2/masks/'
 
-TRAIN_PATH1 = 'D:/Mapna/Results_T2_UNET_DSC_ADAM_COSTUMLOSS1.5,1_EPOCHS300_learning/train-t2/images/'
-MASK_PATH1 = 'D:/Mapna/Results_T2_UNET_DSC_ADAM_COSTUMLOSS1.5,1_EPOCHS300_learning/train-t2/masks/'
-TEST_PATH1 = 'D:/Mapna/Results_T2_UNET_DSC_ADAM_COSTUMLOSS1.5,1_EPOCHS300_learning/test-t2/images/'
-Mask_PATH2 = 'D:/Mapna/Results_T2_UNET_DSC_ADAM_COSTUMLOSS1.5,1_EPOCHS300_learning/test-t2/masks/'
 
 
 
@@ -66,19 +57,8 @@ masks_ids2=glob.glob(Mask_PATH2+"*.png")
 
 
 
-#################################################################################
-#TRAIN_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/images/'
-#MASK_PATH1 = '/content/drive/My Drive/data-MS/train-flaire/masks/'
-#TEST_PATH1 = '/content/drive/My Drive/data-MS/test-flaire/images/'
-#Mask_PATH2 = '/content/drive/My Drive/data-MS/test-flaire/masks/'
 
-#print(TRAIN_PATH1)
-#train_ids=glob.glob(TRAIN_PATH1+"*.png") 
-#masks_ids=glob.glob(MASK_PATH1+"*.png")
-#test_ids=glob.glob(TEST_PATH1+"*.png")
-#masks_ids2=glob.glob(Mask_PATH2+"*.png")
 
-#print(train_ids)
            
 #################################################################################  
 
